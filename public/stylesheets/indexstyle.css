@@ -50,13 +50,16 @@ p{
 	background:url(images/main_bg.jpg) no-repeat 0 0 #1A1A1A;
 	line-height:0px;
 	font-size:0px;
-	padding-top:74px;
+	padding-top:24px;
 }
 .body_bg{
-	background:url(images/body_bg.jpg) repeat-x 0 0 #1A1A1A;
-	line-height:0px;
-	font-size:0px;
-	padding:21px 0 43px;
+	background: url(images/body_bg.jpg) repeat-x 0 0 #1A1A1A;
+	line-height: 0px;
+	font-size: 0px;
+	padding-top: 20px;
+	padding-right: 0;
+	padding-left: 0;
+	padding-bottom: 43px;
 }
 .logo_bg{
 	padding-bottom:5px;
@@ -110,15 +113,21 @@ p{
 	padding:16px 0 22px;
 }
 .header_bg h2{
-	color:#000;
-	background-color:inherit;
-	padding:5px 0 7px;
+	color: #000;
+	background-color: inherit;
+	padding-right: 0;
+	padding-left: 0;
+	padding-bottom: 7px;
+	padding-top: 0px;
 }
 .header_bg h2 span{
 	color:#2A5C0B;
-	font:normal 16px/23px "Tahoma", Arial, Helvetica, sans-serif;
+	font:normal 14px/23px "Tahoma", Arial, Helvetica, sans-serif;
 	background-color:inherit;
 	display:block;
+}
+.header_bg h2 span a{
+	color:#7D63F0;
 }
 .header_bg p{
 	color:#000;
@@ -126,7 +135,7 @@ p{
 	width:435px;
 }
 .header_bg ul{
-	padding-top:17px;
+	padding-top:5px;
 }
 .header_bg ul li{
 	background:url(images/bullet.gif) no-repeat 0 50%;
@@ -135,10 +144,10 @@ p{
 	font-size:0px;
 }
 .header_bg ul li a{
-	font:normal 10px/14px Arial, Helvetica, sans-serif;
-	color:#EA2A15;
-	background-color:inherit;
-	text-decoration:none;
+	font: normal 14px/14px Arial, Helvetica, sans-serif;
+	color: #885700;
+	background-color: inherit;
+	text-decoration: none;
 }
 .header_bg ul li a:hover{
 	text-decoration:underline;
