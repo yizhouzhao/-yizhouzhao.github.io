@@ -195,18 +195,18 @@ p{
 	padding-right:22px;
 }
 .body_left h2{
-	padding:29px 0 34px;
+	padding:29px 0 14px;
 }
 .body_left a.img{
 	display:block;
-	border:10px solid #fff;
+	border:10px solid #1f1f1f;
 	text-decoration:none;
 }
 .body_left a.img:hover{
-	border:10px solid #E4ED5C;
+	border:10px solid #226688;
 }
 .body_left p{
-	font:normal 11px/14px "Trebuchet MS", Arial, Helvetica, sans-serif;
+	font:normal 14px/16px "Trebuchet MS", Arial, Helvetica, sans-serif;
 	padding-top:12px;
 }
 /*---------BODY_LEFT ENDS----------*/
