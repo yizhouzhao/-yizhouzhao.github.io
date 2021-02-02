@@ -1,6 +1,7 @@
 // JavaScript Document
 
 var board_count_num;
+var chessboard_list = []
 
 function init() {
     //init code
@@ -16,16 +17,21 @@ function init() {
         sparePieces: true,
         showNotation: false,
     })
-
-    //init tactics
+	
+	//test: init tactics
     var des_str = "159 Panda Miao USA 1991 I g 1.? +-";
     var fes_str = 'r2qr1k1/1pnb1pp1/p1n1p2p/8/P2P3P/B2B1NP1/6P1/R2Q1RK1 w - - 0 1';
-    create_one_tactic(des_str, fes_str, "no solution");
+    //create_one_tactic(des_str, fes_str, "no solution");
 
     board_count_num++;
 
+
     change_page(true, init = true);
     //load_tactic_from_book();
+	
+	//console.log(board_count_num);
+	//console.log(chessboard_list.length);
+	
 }
 
 function create_one_tactic(descriptions, FEN, solution) {
@@ -41,9 +47,9 @@ function create_one_tactic(descriptions, FEN, solution) {
 
     var tactic_block = $('#tacticblock_' + board_count_num.toString()); //
 
-    var block_header = $("<h5>" + info_list[0] + " " + info_list[1] + " vs " + info_list[2] + " </h5>"
-        + "<div style=\"display: flex\"><div style=\"flex-grow: 1;\"> "
-        + info_list[3] + " " + info_list[4] + "</div>" + "<div>" + info_list[5] + " " + info_list[6] + " </div>" + "</div>");
+    var block_header = $("<h5 class=\"title-number\">" + info_list[0] + "</h5><h5>" + info_list[1] + " vs " + info_list[2] + " </h5>"
+        + "<div style=\"display: flex\"><div style=\"flex-grow: 1;\"> <h5>"
+        + info_list[3] + " " + info_list[4] + "</h5></div>" + "<div><h5>" + info_list[5] + " " + info_list[6] + "</h5></div>" + "</div>");
     var block_main = $("<div id=\"" + new_board_id + "\" class=\"small-board\">");
     var block_footer = $("<div style=\"display: flex\"><div style=\"flex-grow: 1;\">"
         + info_list[7] + "</div>" + "<div>" + info_list[8] + "</div>" + "</div>");
@@ -57,11 +63,18 @@ function create_one_tactic(descriptions, FEN, solution) {
         position: FEN,
         showNotation: false,
     });
+
+    return new_board;
 }
 
 function load_tactic_from_book(page = 0) {
     var main_container = $('#realBodyContainer');
-    main_container.empty();
+	
+    //change page 
+	main_container.empty();
+	board_count_num = 1;
+	while (chessboard_list.length) { chessboard_list.pop(); }
+	
     //load tactic from book
     for (var i = 0; i < 3; i++) {
         var row_container = $("<div></div>").addClass("container-4e1ee");
@@ -71,6 +84,8 @@ function load_tactic_from_book(page = 0) {
                 break;
             }
             var book_item = book[9 * page + 3 * i + j];
+			
+			//console.log("tacticblock_" + board_count_num.toString());
 
             var block_container = make_hover_card("tacticblock_" + board_count_num.toString(), book_item);
             //$("<div id=\"tacticblock_" + board_count_num.toString() + "\"></div>").addClass("tactic_block");
@@ -78,8 +93,23 @@ function load_tactic_from_book(page = 0) {
 
             row_container.append(block_container);
 
-            create_one_tactic(book_item['description'], book_item['FEN'], book_item['solution']);
-            board_count_num++;
+            var chess_board = create_one_tactic(book_item['description'], book_item['FEN'], book_item['solution']);
+            
+			chessboard_list.push(chess_board);
+			
+            //set up flip board
+            var flip_button = block_container.find('.flip-board-button');
+			flip_button.attr("id", "flip_button_" + board_count_num.toString());
+			
+			var id_num = board_count_num;
+            flip_button.click(function() {
+				console.log($(this).attr("id"));
+				var button_id = $(this).attr("id");
+				var board_index = button_id.charAt(button_id.length - 1);
+				chessboard_list[board_index-1].flip();
+            });
+			
+			board_count_num++;
         }
     }
 }
@@ -93,7 +123,8 @@ function make_hover_card(block_id, book_item, FEN = "") {
                     </div>
                     <div class="flip-card-back">
                             <div class="btn-group" role="group" style="margin-top:10px;">
-                                <button type="button" class="btn btn-outline-primary show-answer-button">Show answer</button>
+                                <button type="button" class="btn btn-outline-primary show-answer-button" style="font-size:12px">Show answer</button>
+								<button type="button" class="btn btn-outline-primary flip-board-button" style="font-size:12px">Flip board</button>
                             </div>
                             <div class="scrollable">
                                 <p class="tactic-answer">${book_item['solution']}</p>
@@ -104,7 +135,7 @@ function make_hover_card(block_id, book_item, FEN = "") {
                                     <button type="button" class="btn btn-outline-primary copy-pgn-button">PGN</button>      
                                 </div>
                             </div>
-							<div class="copy-notification" style="visibility:hidden;">Copied successfully (analyze in <a href="https://www.chess.com/analysis">chess.com </a>)</div>
+							<div class="copy-notification" style="visibility:hidden;"><p>Copied successfully </br> (analyze in <a href="https://www.chess.com/analysis" target="_blank">chess.com </a>)</p></div>
                     </div>
                 </div>
             </div>`)
@@ -112,7 +143,7 @@ function make_hover_card(block_id, book_item, FEN = "") {
     var scroll_part = card.find('.scrollable');
     scroll_part.css("visibility", "hidden");
 
-    //set up botton
+    //set up answer botton
     var show_button = card.find('.show-answer-button');
 
     show_button.click(function () {
@@ -126,10 +157,12 @@ function make_hover_card(block_id, book_item, FEN = "") {
 
     })
 
+    //set up flip board
+
     //set up copy
     var copy_fen_button = card.find(".copy-fen-button");
     var copy_notification = card.find(".copy-notification");
-	var copy_pgn_button = card.find(".copy-pgn-button");
+    var copy_pgn_button = card.find(".copy-pgn-button");
 
     copy_fen_button.click(function () {
         var $temp = $("<input>");
@@ -137,18 +170,18 @@ function make_hover_card(block_id, book_item, FEN = "") {
         $temp.val(book_item['FEN']).select();
         document.execCommand("copy");
         $temp.remove();
-		
-		copy_notification.css("visibility","visible");
+
+        copy_notification.css("visibility", "visible");
     })
-	
-	copy_pgn_button.click(function () {
+
+    copy_pgn_button.click(function () {
         var $temp = $("<input>");
         $("body").append($temp);
         $temp.val(book_item['PGN']).select();
         document.execCommand("copy");
         $temp.remove();
-		
-		copy_notification.css("visibility","visible");
+
+        copy_notification.css("visibility", "visible");
     })
 
     return card;
