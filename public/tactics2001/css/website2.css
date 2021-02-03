@@ -317,7 +317,7 @@ footer {
     background: #713134;
     color: #713134;
     font-size: 14px;
-    padding: 30px 0;
+    padding: 30px 0px 5px;
 }
 footer p {
     margin: 0 0 8px 0;
@@ -705,7 +705,9 @@ footer p{
     width: 200px;
 }
 .flip-card:hover .tactic_block {
-    display: none;
+    opacity: 0;
+	transition: opacity 1s;
+	display:none;
     /*opacity: 0.1;*/
 }
 .flip-card {
