@@ -8,7 +8,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="shortcut icon" href="https://chessboardjs.com/img/favicon.ico" type="image/x-icon">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-<link rel="stylesheet" href="css/css">
 <link rel="stylesheet" href="css/website2.css">
 <link rel="stylesheet"
 href="https://unpkg.com/@chrisoakman/chessboardjs@1.0.0/dist/chessboard-1.0.0.min.css"
@@ -39,7 +38,7 @@ crossorigin="anonymous">
 <body data-new-gr-c-s-check-loaded="14.993.0" data-gr-ext-installed="">
 <header style="background-color: #713134">
     <div class="body-width-115f6 flex-c31d5">
-        <div class="left-3edd4"> <a class="homepage-link-98a24" href="https://chessboardjs.com/index.html">Tactics 2001<span class="tld-bd9e6"> Made by Yizhou Zhao, 2021</span></a> </div>
+        <div class="left-3edd4"> <a class="homepage-link-98a24" href="https://chessboardjs.com/index.html">Tactics 2021<span class="tld-bd9e6"> Made by Yizhou Zhao, 2021</span></a> </div>
         <div class="right-05ad3"> <a href="https://chessboardjs.com/index.html">Home</a> <a class="active" <a href="https://chessboardjs.com/download">Download</a> </div>
     </div>
 </header>
@@ -60,13 +59,12 @@ crossorigin="anonymous">
         <div class="examples-body-9af4d" id="exampleBodyContainer">
             <div class="example-block-head d-flex justify-content-between">
                 <nav aria-label="Page navigation example">
-                    <ul class="pagination">
+                    <div class="page-item" hidden><a class="page-link" id="pageId" href="#">1</a></div>
+                    <ul class="pagination" id="pageUl">
                         <li class="page-item" id="previousPageLi"> <a class="page-link" href="#" aria-label="Previous" onClick="change_page(false)" id=""> <span aria-hidden="true">&laquo;</span> <span class="sr-only">Previous</span> </a> </li>
-                        <li class="page-item"><a class="page-link" id="pageId" href="#">1</a></li>
                         <li class="page-item" id="nextPageLi"> <a class="page-link" href="#" aria-label="Next" onClick="change_page(true)"> <span aria-hidden="true">&raquo;</span> <span class="sr-only">Next</span> </a> </li>
                     </ul>
                 </nav>
-                <h4 hidden>Page 132</h4>
             </div>
             <div id="fakeBodyContainer" hidden>
                 <div class="container-4e1ee">
@@ -88,7 +86,7 @@ crossorigin="anonymous">
                             </div>
                             <div class="scrollable" style="visibility:visible;">
                                 <p class="tactic-answer">@fat
-                                    Ad leggings keytar, brunch id art party dolor labore. Pitchfork yr enim lo-fi before they sold out qui. Tumblr farm-to-table bicycle rights whatever. Anim keffiyeh carles cardigan. Velit seitan mcsweeney's photo booth 3 wolf moon irure. Cosby sweater lomo jean shorts, williamsburg hoodie minim qui you probably haven't heard of them et cardigan trust fund culpa biodiesel wes anderson aesthetic. Nihil tattooed accusamus, cred irony biodiesel keffiyeh artisan ullamco consequat.</p>
+                                    Ad 	&#9812; &#9823; leggings &#9822; keytar, brunch id art party dolor labore. Pitchfork yr enim lo-fi before they sold out qui. Tumblr farm-to-table bicycle rights whatever. Anim keffiyeh carles cardigan. Velit seitan mcsweeney's photo booth 3 wolf moon irure. Cosby sweater lomo jean shorts, williamsburg hoodie minim qui you probably haven't heard of them et cardigan trust fund culpa biodiesel wes anderson aesthetic. Nihil tattooed accusamus, cred irony biodiesel keffiyeh artisan ullamco consequat.</p>
                             </div>
                             <div style="display: inline;"> <span>Copy: </span>
                                 <div class="btn-group" role="group" aria-label="Basic outlined example">

@@ -3,6 +3,22 @@
 var board_count_num;
 var chessboard_list = []
 
+//Letter2Chesscode
+var letter2chess = {
+	"wK": "&#9812;",
+	"wQ": "&#9813;",
+	"wR": "&#9814;",
+	"wB": "&#9815;",
+	"wN": "&#9816;",
+	"wP": "&#9817;",
+	"bK": "&#9818;",
+	"bQ": "&#9819;",
+	"bR": "&#9820;",
+	"bB": "&#9821;",
+	"bN": "&#9822;",
+	"bP": "&#9823;",
+}
+
 function init() {
     //init code
     board_count_num = 0;
@@ -21,7 +37,7 @@ function init() {
     //test: init tactics
     var des_str = "159 Panda Miao USA 1991 I g 1.? +-";
     var fes_str = 'r2qr1k1/1pnb1pp1/p1n1p2p/8/P2P3P/B2B1NP1/6P1/R2Q1RK1 w - - 0 1';
-    //create_one_tactic(des_str, fes_str, "no solution");
+    create_one_tactic(des_str, fes_str, "no solution");
 
     board_count_num++;
 
@@ -42,7 +58,7 @@ function create_one_tactic(descriptions, FEN, solution) {
     FEN: chess FEN board
     solution: solution string
     */
-    const info_list = descriptions.split(' ');
+    var info_list = descriptions.split(' ');
     var new_board_id = "tacticboard_" + board_count_num.toString();
 
     var tactic_block = $('#tacticblock_' + board_count_num.toString()); //
@@ -130,7 +146,7 @@ function make_hover_card(block_id, book_item, FEN = "") {
 								<button type="button" class="btn btn-outline-primary flip-board-button" style="font-size:12px">Flip board</button>
                             </div>
                             <div class="scrollable">
-                                <p class="tactic-answer">${book_item['solution']}</p>
+                                <p class="tactic-answer">${solution_string2chess_code(book_item['solution'])}</p>
                             </div>
                             <div> <span>Copy:</span>
                                 <div class="btn-group" role="group" aria-label="Basic outlined example">
@@ -141,7 +157,7 @@ function make_hover_card(block_id, book_item, FEN = "") {
 							<div class="copy-notification" style="visibility:hidden;"><p>Copied successfully </br> (analyze in <a href="https://www.chess.com/analysis" target="_blank">chess.com </a>)</p></div>
                     </div>
                 </div>
-            </div>`)
+            </div>`);
 
     // set fade effect
     /*card.hover(function () {
@@ -198,7 +214,7 @@ function make_hover_card(block_id, book_item, FEN = "") {
     })
 
     copy_pgn_button.click(function () {
-        var $temp = $("<input>");
+        var $temp = $("<textarea>");
         $("body").append($temp);
         $temp.val(book_item['PGN']).select();
         document.execCommand("copy");
@@ -210,24 +226,33 @@ function make_hover_card(block_id, book_item, FEN = "") {
     return card;
 }
 
-
-function change_page(next_page = true, init = false) {
+//change page for loading tactics
+function change_page(next_page = true, init = false, page = 0) {
     //change page
     var page_id = parseInt($("#pageId").text());
     if (next_page)
         page_id++;
     else
         page_id--;
+	
+	var max_page = Math.ceil(book.length / 9)
 
     if (init) {
         page_id = 1;
+		make_pagination(max_page);
     }
+	else if(page > 0){
+		page_id = page;
+	} 
+	
+	//change page
+	set_pagination(page_id, max_page);
 
     $("#pageId").text(page_id.toString());
 
     load_tactic_from_book(page_id - 1);
 
-    //disable previous page
+    /*//disable previous page
     var previous_page_li = $("#previousPageLi");
     var next_page_li = $("#nextPageLi");
     if (page_id == 1) {
@@ -242,6 +267,114 @@ function change_page(next_page = true, init = false) {
     } else {
         if (next_page_li.hasClass("disabled"))
             next_page_li.removeClass("disabled");
+    }*/
+
+}
+
+//parse solution string into chess code
+function solution_string2chess_code(solution){
+	//solution 1. Bxh7+ Kxh7 2. Ne4 +- (2. Ne4 Be7 3. Nf6+ gxf6
+	var new_solution = ""
+	var color = "w" // or "b"
+	for(var i = 0; i < solution.length; i++){
+		var c = solution.charAt(i);
+		// it is a number
+		if (c >= '0' && c <= '9') {
+			if (i < solution.length - 1){
+				if (solution.charAt(i + 1) == "."){
+					color = "w";
+					if (i < solution.length - 2){
+						if (solution.charAt(i + 2) == "."){
+							color = "b";
+						}
+					}
+				}
+			}
+			new_solution += c;
+		}
+		//is char
+		else if(c >= "A" && c <= "Z"){
+			var piece = color + c;
+			var chess_code = letter2chess[piece];
+			new_solution += chess_code
+			if (color == "w"){
+				color = "b";
+			}
+		}
+		else{
+			new_solution += c;
+		}
+	}
+	
+	return new_solution;
+}
+
+
+//make pagination 
+function make_pagination(max_page) {
+    var page_ul = $("#pageUl");
+    for (var i = 1; i <= max_page; i++) {
+        var page_li = $(`<li class="page-item"><a class="page-link" href="#">${i.toString()}</a></li>`);
+        page_li.insertBefore("#pageUl li:last-child");
+        var page_link = page_li.find("a");
+        page_link.attr("page_num", i.toString());
+        page_link.click(function () {
+            var page_num = $(this).attr("page_num");
+            console.log("setpage!" + page_num);
+            change_page(true, false, page_num);
+        });
+    }
+
+}
+
+//set pagination
+function set_pagination(page, max_page) {
+    var page_ul = $("#pageUl");
+    var previous_page_li = $("#pageUl li:first-child");
+    var next_page_li = $("#pageUl li:last-child");
+
+
+    if (page == 1) {
+        previous_page_li.addClass("disabled");
+    } else {
+        if (previous_page_li.hasClass("disabled"))
+            previous_page_li.removeClass("disabled");
+    }
+
+    if (page >= max_page) {
+        next_page_li.addClass("disabled");
+    } else {
+        if (next_page_li.hasClass("disabled"))
+            next_page_li.removeClass("disabled");
+    }
+
+    var ul_children = page_ul.children();
+    //
+    for (var i = 2; i < ul_children.length - 2; i++) {
+        //console.log(ul_children);
+		var child_i = ul_children.eq(i);
+        if (page - i == 3 || i - page == 3) {
+			child_i.css("display", "");
+            child_i.find("a").text("...");
+            child_i.addClass("disabled");
+
+        } else if (page - i > 3 || i - page > 3) {
+            child_i.css("display", "none");
+        } else {
+			child_i.css("display", "");
+            child_i.find("a").text(i.toString());
+            child_i.removeClass("disabled");
+        }
+
+        child_i.find("a").removeClass("bg-page");
+
+    }
+    for (var i = 1; i < ul_children.length - 1; i++) {
+        if (i != page) {
+            ul_children.eq(i).find("a").removeClass("bg-page");
+        } else {
+            ul_children.eq(page).find("a").addClass("bg-page");
+        }
     }
 
 }
