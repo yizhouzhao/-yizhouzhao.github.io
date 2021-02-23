@@ -225,10 +225,10 @@ main {
     padding: 5px 0px 5px 15px;
 }
 .example-nav-0e953 li:hover {
-    color: #222;
+    color: #713134;
 }
 .example-nav-0e953 li.active {
-    color: #222;
+    color: #713134;
     font-weight: bold;
 }
 .examples-body-9af4d h2 {
@@ -376,4 +376,24 @@ div.copy-notification {
 
 a.bg-page {
 	color: #713134
+}
+
+/*---------------------------menu-------------------------------*/
+div.dropdown button img{
+	height: 20px;
+	width: 20px;
+}
+
+div.dropdown {
+	margin-top: 8px;
+	padding-left: 5px;
+}
+
+div.dropdown button.dropdown-item img{
+	height: 20px;
+	width: 20px;
+}
+
+.dropdown-menu {
+    min-width: 0px !important;
 }
