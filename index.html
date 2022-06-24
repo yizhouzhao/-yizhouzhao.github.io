@@ -9,6 +9,20 @@
     <link href="app/home/css/templatemo-xtra-blog.css" rel="stylesheet">
     <link href="app/home/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="app/home/fontawesome/css/all.min.css"> <!-- https://fontawesome.com/ -->
+	
+    <!----script--->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+	<script> $(function(){$("#social").load("common/social.html");});</script> 
+	<script src="app/home/js/home.js"></script>
+    <script src="app/home/js/data/notices.js"></script>
+	<script>
+		;(function () {
+		  function isTouchDevice () {
+			return ('ontouchstart' in document.documentElement)
+		  }
+		  $(document).ready(init)
+		})()
+	</script> 
 </head>
 <body>
 	<header class="tm-header" id="tm-header">
@@ -18,7 +32,7 @@
             </button>
             <div class="tm-site-header">
                 <div class="mb-3 mx-auto tm-site-logo"><img src="app/aboutme/images/yizhou_img.jpg" alt="Image" class="img-fluid"></div>            
-                <h5 class="text-center">Hi! I am Yizhou Zhao</h5>
+                <h4 class="text-center">Hi! I am Yizhou Zhao</h4>
             </div>
             <nav class="tm-nav" id="tm-nav">            
                 <ul>
@@ -40,20 +54,7 @@
                     </a></li>
                 </ul>
             </nav>
-            <div class="tm-social-icon">
-                <a rel="nofollow" href="https://fb.com/templatemo" class="tm-social-link">
-                    <i class="fab fa-github tm-social-icon"></i>
-                </a>
-                <a href="https://twitter.com" class="tm-social-link">
-                    <i class="fab fa-twitter tm-social-icon"></i>
-                </a>
-                <a href="https://instagram.com" class="tm-social-link">
-                    <i class="fab fa-google tm-social-icon"></i>
-                </a>
-                <a href="https://linkedin.com" class="tm-social-link">
-                    <i class="fab fa-linkedin tm-social-icon"></i>
-                </a>
-            </div>
+            <div id="social"></div>
             <p class="tm-mb-80 pr-5 text-white">
                Last updated: 06/2022
             </p>
@@ -72,7 +73,7 @@
                     </form>
                 </div>                
             </div>            
-            <div class="row tm-row">
+            <div class="row tm-row" id="leafContainer">
                 <article class="col-12 col-md-6 tm-post">
                     <hr class="tm-hr-primary">
                     <a href="post.html" class="effect-lily tm-post-link tm-pt-60">
