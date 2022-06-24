@@ -12,3 +12,4 @@ Dockerfile
 docker-compose.yml
 
 draft/*
+csr_private_key.*
