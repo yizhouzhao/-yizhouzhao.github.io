@@ -19,6 +19,11 @@ router.get('/',function(req,res){
   //__dirname : It will resolve to your project folder.
 });
 
+router.get('/aboutme',function(req,res){
+  res.sendFile(path.join(__dirname+'/app/aboutme/aboutme.html'));
+  //__dirname : It will resolve to your project folder.
+});
+
 const app = express();
 app.use('/', router);
 app.listen(PORT);
