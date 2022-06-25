@@ -34,7 +34,7 @@ function make_leaf(title, image_path, description, date, basic_link, aux_desc, a
     var leaf = $(`
         <article class="col-12 col-md-6 tm-post">
             <hr class="tm-hr-primary">
-            <a href="post.html" class="effect-lily tm-post-link tm-pt-60">
+            <a href="${basic_link}" class="effect-lily tm-post-link tm-pt-60">
                 <div class="tm-post-link-inner">
                     <img src="${image_path}" alt="Image" class="img-fluid">                            
                 </div>
@@ -59,3 +59,6 @@ function make_leaf(title, image_path, description, date, basic_link, aux_desc, a
 
     return leaf
 }
+
+
+{/* <script> $(function(){$("#social").load("../../common/social.html");});</script>  */}

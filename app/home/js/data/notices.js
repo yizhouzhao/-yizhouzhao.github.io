@@ -3,7 +3,7 @@ var notices = [
         "title": "How to make a personal website like this?",
         "image_path":"blog/a1/images/webshoot.png",
         "description": "I had a hardtime building a website like this: with a personal domain and colorful page. I only spend a little money on the domain. The rest thing is easy if you follow this tutorial.",
-        "basic_link": "https://vrkitchen20-tutorial.readthedocs.io/en/latest/",
+        "basic_link": "blog/a1/post.html",
         "aux_desc": "",
         "aux_link":"",
         "date":"June 24, 2022",
@@ -18,5 +18,15 @@ var notices = [
         "aux_link":"https://arxiv.org/abs/2206.11887",
         "date":"June 23, 2022",
         "category":"paper",
+    },
+    {
+        "title": "Demystify Diffusion Model",
+        "image_path":"blog/a2/Demystify Diffusion Model/Generation-with-Diffusion-Models.png",
+        "description": "How diffusion model works? What is the math behind diffusion model? I am going to discuss it with easy math.",
+        "basic_link": "blog/a2/post.html",
+        "aux_desc": "",
+        "aux_link":"",
+        "date":"June 17, 2022",
+        "category":"blog",
     }
 ]

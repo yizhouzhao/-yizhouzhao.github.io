@@ -17,7 +17,6 @@ body {
     overflow-x: hidden;
 }
 
-p, span { color: #999; }
 hr { 
     border-top-color: #CCC; 
     margin-top: 10px;
@@ -60,8 +59,8 @@ hr {
 }
 
 .tm-site-logo {
-    width: 120px;
-    height: 100px;
+    width: 240px;
+    height: auto;
     border-radius: 12%;
     background-color: white;    
     display: flex;
@@ -70,8 +69,8 @@ hr {
 }
 
 .tm-site-logo img { 
-	width: 100px;
-    height: 86px; 
+	width: 200px;
+    height: auto; 
 }
 
 .tm-blog-logo {
